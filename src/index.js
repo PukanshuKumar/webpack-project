@@ -1,3 +1,5 @@
+import "./styles/index.scss"
+
 const elvenShielRecipe = {
     leatherStrings: 2,
     ironIngot: 1,
