@@ -1,16 +1,6 @@
-import "./styles/index.scss"
+// Import the required modules
+import { createRoot } from 'react-dom/client';
+import App from './components/App';
 
-const elvenShielRecipe = {
-    leatherStrings: 2,
-    ironIngot: 1,
-    refinemoonston:4,
-};
-
-const elvenGauntletsRecipe = {
-    ...elvenShielRecipe,
-    leather: 1,
-    refinedMoonstone:4,
-}
-
-console.log(elvenShielRecipe);
-console.log(elvenGauntletsRecipe);
+// Use createRoot to render your React application
+createRoot(document.getElementById('root')).render(<App />);
