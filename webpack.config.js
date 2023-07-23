@@ -3,18 +3,34 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 let mode = "development";
 let target = "web";
 
-if(process.env.NODE_ENV === "production"){
+if (process.env.NODE_ENV === "production") {
   mode = "production";
   target = "browserslist";
 }
 module.exports = {
   mode: mode,
+  target: target,
 
+  output: {
+    assetModuleFilename: "images/[hash][ext][query]"
+  },
   module: {
+
     rules: [
       {
-        test:/\.s?css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader","postcss-loader","sass-loader"],
+        test: /\.(png|jpe?g|gif|avif|svg)$/i,
+        type: "asset/resource",
+      },
+      {
+        // test:/\.s?css$/i,
+        test: /\.(s[ac]|c)ss$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: { publicPath: "" }
+          },
+          "css-loader", "postcss-loader", "sass-loader"
+        ],
       },
       {
         test: /\.jsx?$/,
@@ -27,17 +43,17 @@ module.exports = {
   },
   devtool: "source-map",
   devServer: {
-    static:{
-        directory: path.resolve(__dirname,'dist')
+    static: {
+      directory: path.resolve(__dirname, 'dist')
     },
-    port:3000,
-    open:true,
-    hot:true,
-    compress:true,
+    port: 3000,
+    open: false,
+    hot: true,
+    compress: true,
     historyApiFallback: true,
-},
-plugins:[new MiniCssExtractPlugin()],
-resolve : {
-  extensions : [".js" , ".jsx"]
-}
+  },
+  plugins: [new MiniCssExtractPlugin()],
+  resolve: {
+    extensions: [".js", ".jsx"]
+  }
 };
